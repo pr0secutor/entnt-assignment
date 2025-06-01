@@ -9,7 +9,6 @@ export const ShipsProvider = ({ children }) => {
   const { addNotification } = useContext(NotificationsContext);
 
   const addShip = (ship) => {
-    console.debug('addShip called with:', ship);
     const newShip = { id: `s${ships.length + 1}`, ...ship };
     const updatedShips = [...ships, newShip];
     setShips(updatedShips);
@@ -18,7 +17,6 @@ export const ShipsProvider = ({ children }) => {
   };
 
   const updateShip = (id, updatedShip) => {
-    console.debug('updateShip called for id:', id, 'with:', updatedShip);
     const updatedShips = ships.map((s) =>
       s.id === id ? { ...s, ...updatedShip } : s
     );
@@ -28,7 +26,6 @@ export const ShipsProvider = ({ children }) => {
   };
 
   const deleteShip = (id) => {
-    console.debug('deleteShip called for id:', id);
     const ship = ships.find((s) => s.id === id);
     const updatedShips = ships.filter((s) => s.id !== id);
     setShips(updatedShips);

@@ -106,17 +106,29 @@ function Charts() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div className="bg-white p-4 rounded shadow w-full max-w-xs mx-auto">
-        <div className="h-96">
-          <h2 className="text-xl font-semibold">Ships</h2>
-          <Pie data={shipStatusChart.data} options={shipStatusChart.options} />
+    <div className="flex flex-col md:flex-row gap-4">
+      <div className="bg-white flex-1 p-4 rounded shadow w-full">
+        <div className="h-96 flex flex-col">
+          <h2 className="text-xl font-semibold mb-2">Ships</h2>
+          <div className="flex-1 relative">
+            <Pie
+              data={shipStatusChart.data}
+              options={shipStatusChart.options}
+              style={{ maxHeight: "100%", maxWidth: "100%" }}
+            />
+          </div>
         </div>
       </div>
-      <div className="bg-white p-4 rounded shadow w-full max-w-xs mx-auto">
-        <div className="h-96">
-          <h2 className="text-xl font-semibold">Jobs</h2>
-          <Pie data={jobStatusChart.data} options={jobStatusChart.options} />
+      <div className="bg-white flex-1 p-4 rounded shadow w-full">
+        <div className="h-96 flex flex-col">
+          <h2 className="text-xl font-semibold mb-2">Jobs</h2>
+          <div className="flex-1 relative">
+            <Pie
+              data={jobStatusChart.data}
+              options={jobStatusChart.options}
+              style={{ maxHeight: "100%", maxWidth: "100%" }}
+            />
+          </div>
         </div>
       </div>
     </div>

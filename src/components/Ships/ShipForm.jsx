@@ -8,10 +8,8 @@ function ShipForm({ existingShip, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.debug('ShipForm handleSubmit called with:', formData); // Debug
     if (!formData.name || !formData.imo || !formData.flag) {
       setError('All fields are required');
-      console.debug('Validation failed: Missing required fields'); // Debug
       return;
     }
     if (existingShip) {

@@ -1,7 +1,6 @@
 import JobList from '../components/Jobs/JobList';
 import JobForm from '../components/Jobs/JobForm';
 import JobCalendar from '../components/Jobs/JobCalendar';
-import NotificationCenter from '../components/Notifications/NotificationCenter';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { roleUtils } from '../utils/roleUtils';
@@ -28,7 +27,6 @@ function JobsPage() {
       {showForm && <JobForm />}
       <JobList />
       <JobCalendar />
-      <NotificationCenter />
     </div>
   );
 }

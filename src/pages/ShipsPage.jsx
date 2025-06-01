@@ -22,7 +22,6 @@ function ShipsPage() {
       )}
       {showForm && <ShipForm onClose={() => setShowForm(false)} />}
       <ShipList />
-      <NotificationCenter />
     </div>
   );
 }

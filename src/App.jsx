@@ -6,6 +6,7 @@ import DashboardPage from './pages/DashboardPage';
 import ShipsPage from './pages/ShipsPage';
 import ShipDetailPage from './pages/ShipDetailPage';
 import JobsPage from './pages/JobsPage';
+import NotificationCenter from './components/Notifications/NotificationCenter';
 
 function App() {
   const { user, logout } = useContext(AuthContext);
@@ -15,7 +16,7 @@ function App() {
     <div className="min-h-screen bg-gray-100">
       {user && (
         <nav className="bg-blue-600 text-white p-4">
-          <div className="container mr-4 flex justify-between">
+          <div className="container flex justify-between">
             <div className="space-x-4 flex items-center">
               <Link to="/dashboard" className="hover:underline">Dashboard</Link>
               <Link to="/ships" className="hover:underline">Ships</Link>
@@ -41,6 +42,7 @@ function App() {
         <Route path="/jobs" element={user ? <JobsPage /> : <LoginPage />} />
         <Route path="*" element={<LoginPage />} />
       </Routes>
+      <NotificationCenter />
     </div>
   );
 }
