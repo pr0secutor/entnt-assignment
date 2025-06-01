@@ -20,7 +20,6 @@ function JobForm() {
   });
   const [error, setError] = useState('');
 
-  // Filter components based on selected ship
   const shipComponents = formData.shipId
     ? components.filter(c => c.shipId === formData.shipId)
     : [];

@@ -5,14 +5,12 @@ function NotificationCenter() {
   const { notifications, dismissNotification } = useContext(NotificationsContext);
 
   useEffect(() => {
-    // Set a 5-second timeout for each notification to auto-dismiss
     const timers = notifications.map(notification => {
       return setTimeout(() => {
         dismissNotification(notification.id);
       }, 5000);
     });
 
-    // Cleanup: Clear all timers when the component unmounts or notifications change
     return () => {
       timers.forEach(timer => clearTimeout(timer));
     };

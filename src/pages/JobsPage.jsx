@@ -25,7 +25,7 @@ function JobsPage() {
           {showForm ? 'Close Form' : 'Add Job'}
         </button>
       )}
-      {showForm && <JobForm />} {/* Removed shipId prop */}
+      {showForm && <JobForm />}
       <JobList />
       <JobCalendar />
       <NotificationCenter />
