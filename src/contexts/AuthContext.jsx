@@ -9,7 +9,12 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const savedUser = localStorageUtils.getData('user');
-    if (savedUser) setUser(savedUser);
+    if (savedUser !== null) {
+      localStorageUtils.setData('user', null);
+    }
+    else {
+      setUser(savedUser);
+    }
     setLoading(false);
   }, []);
 

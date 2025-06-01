@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <AuthProvider>
-      <NotificationsProvider> {/* Moved up */}
+      <NotificationsProvider>
         <ShipsProvider>
           <ComponentsProvider>
             <JobsProvider>
