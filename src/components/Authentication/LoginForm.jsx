@@ -16,7 +16,7 @@ function LoginForm() {
       return;
     }
     if (login(email, password)) {
-      navigate('/dashboard');
+      navigate('/');
     } else {
       setError('Invalid credentials');
     }

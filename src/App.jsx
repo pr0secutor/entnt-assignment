@@ -1,4 +1,4 @@
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from './contexts/AuthContext';
 import LoginPage from './pages/LoginPage';
@@ -7,10 +7,15 @@ import ShipsPage from './pages/ShipsPage';
 import ShipDetailPage from './pages/ShipDetailPage';
 import JobsPage from './pages/JobsPage';
 import NotificationCenter from './components/Notifications/NotificationCenter';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, loading } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  if (loading) {
+    return <div className="p-6">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -18,7 +23,7 @@ function App() {
         <nav className="bg-blue-600 text-white p-4">
           <div className="container flex justify-between">
             <div className="space-x-4 flex items-center">
-              <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+              <Link to="/" className="hover:underline">Dashboard</Link>
               <Link to="/ships" className="hover:underline">Ships</Link>
               <Link to="/jobs" className="hover:underline">Jobs</Link>
             </div>
@@ -35,12 +40,15 @@ function App() {
         </nav>
       )}
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={user ? <DashboardPage /> : <LoginPage />} />
+        <Route
+          path="/login"
+          element={user ? <Navigate to="/" replace /> : <LoginPage />}
+        />
+        <Route path="/" element={user ? <DashboardPage /> : <LoginPage />} />
         <Route path="/ships" element={user ? <ShipsPage /> : <LoginPage />} />
         <Route path="/ships/:id" element={user ? <ShipDetailPage /> : <LoginPage />} />
         <Route path="/jobs" element={user ? <JobsPage /> : <LoginPage />} />
-        <Route path="*" element={<LoginPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <NotificationCenter />
     </div>
