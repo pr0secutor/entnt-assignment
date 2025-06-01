@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from 'react';
-import { localStorageUtils } from '../utils/localStorageUtils';
+import { createContext, useState, useEffect } from "react";
+import { localStorageUtils } from "../utils/localStorageUtils";
 
 export const AuthContext = createContext();
 
@@ -8,22 +8,22 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedUser = localStorageUtils.getData('user');
-    if (savedUser !== null) {
-      localStorageUtils.setData('user', null);
-    }
-    else {
-      setUser(savedUser);
+    const savedUser = localStorage.getItem("user");
+
+    if (savedUser && user === null) {
+      setUser(JSON.parse(savedUser));
     }
     setLoading(false);
-  }, []);
+  }, [user]);
 
   const login = (email, password) => {
-    const users = localStorageUtils.getData('users');
-    const foundUser = users.find(u => u.email === email && u.password === password);
+    const users = localStorageUtils.getData("users");
+    const foundUser = users.find(
+      (u) => u.email === email && u.password === password
+    );
     if (foundUser) {
       setUser(foundUser);
-      localStorageUtils.setData('user', foundUser);
+      localStorageUtils.setData("user", foundUser);
       return true;
     }
     return false;
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorageUtils.setData('user', null);
+    localStorageUtils.setData("user", null);
   };
 
   return (
