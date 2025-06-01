@@ -9,7 +9,7 @@ function ComponentList({ shipId }) {
   const shipComponents = components.filter(c => c.shipId === shipId);
 
   return (
-    <div className="bg-white p-6 rounded shadow w-full">
+    <div className="bg-white p-6 rounded shadow w-full mb-4">
       <h2 className="text-2xl font-bold mb-4">Components</h2>
       <div className="overflow-x-auto">
         <table className="min-w-2xl w-full table-auto">

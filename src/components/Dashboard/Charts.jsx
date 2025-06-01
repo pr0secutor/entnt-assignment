@@ -5,26 +5,22 @@ import { JobsContext } from "../../contexts/JobsContext";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
-// Register Chart.js components and datalabels plugin
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 function Charts() {
   const { ships } = useContext(ShipsContext);
   const { jobs } = useContext(JobsContext);
 
-  // Calculate ship status counts
   const statusCounts = ships.reduce((acc, ship) => {
     acc[ship.status] = (acc[ship.status] || 0) + 1;
     return acc;
   }, {});
 
-  // Calculate job status counts
   const jobStatusCounts = jobs.reduce((acc, job) => {
     acc[job.status] = (acc[job.status] || 0) + 1;
     return acc;
   }, {});
 
-  // Ship status pie chart configuration
   const shipStatusChart = {
     type: "pie",
     data: {
@@ -33,7 +29,7 @@ function Charts() {
         {
           label: "Ships by Status",
           data: Object.values(statusCounts),
-          backgroundColor: ["#3b82f6", "#ef4444"], // Blue for Active, Red for Under Maintenance
+          backgroundColor: ["#3b82f6", "#ef4444"],
           borderColor: ["#1e40af", "#b91c1c"],
           borderWidth: 1,
         },
@@ -41,7 +37,7 @@ function Charts() {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false, // Allow custom height
+      maintainAspectRatio: false,
       plugins: {
         legend: { position: "top" },
         title: { display: true, text: "Ship Status Distribution" },
@@ -57,17 +53,16 @@ function Charts() {
           },
         },
         datalabels: {
-          color: "#fff", // White text for contrast
+          color: "#fff",
           font: { weight: "bold", size: 12 },
-          formatter: (value) => value, // Display raw count
-          anchor: "center", // Center the label in the segment
+          formatter: (value) => value,
+          anchor: "center",
           align: "center",
         },
       },
     },
   };
 
-  // Job status pie chart configuration
   const jobStatusChart = {
     type: "pie",
     data: {
@@ -76,7 +71,7 @@ function Charts() {
         {
           label: "Jobs by Status",
           data: Object.values(jobStatusCounts),
-          backgroundColor: ["#3b82f6", "#ef4444", "#10b981"], // Blue for Open, Red for In Progress, Green for Completed
+          backgroundColor: ["#3b82f6", "#ef4444", "#10b981"],
           borderColor: ["#1e40af", "#b91c1c", "#047857"],
           borderWidth: 1,
         },
@@ -84,7 +79,7 @@ function Charts() {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false, // Allow custom height
+      maintainAspectRatio: false,
       plugins: {
         legend: { position: "top" },
         title: { display: true, text: "Job Status Distribution" },
@@ -100,10 +95,10 @@ function Charts() {
           },
         },
         datalabels: {
-          color: "#fff", // White text for contrast
+          color: "#fff",
           font: { weight: "bold", size: 12 },
-          formatter: (value) => value, // Display raw count
-          anchor: "center", // Center the label in the segment
+          formatter: (value) => value,
+          anchor: "center",
           align: "center",
         },
       },
