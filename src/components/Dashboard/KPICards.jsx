@@ -12,7 +12,7 @@ function KPICards() {
     const lastMaintenance = new Date(c.lastMaintenanceDate);
     const now = new Date();
     const diffYears = (now - lastMaintenance) / (1000 * 60 * 60 * 24 * 365);
-    return diffYears > 1; // Assume maintenance due yearly
+    return diffYears > 1;
   });
 
   const jobsInProgress = jobs.filter(j => j.status === 'In Progress').length;

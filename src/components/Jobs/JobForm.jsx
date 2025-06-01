@@ -69,7 +69,7 @@ function JobForm() {
             onChange={(e) => setFormData({ ...formData, componentId: e.target.value })}
             className="w-full p-2 border rounded"
             required
-            disabled={!formData.shipId} // Disable until a ship is selected
+            disabled={!formData.shipId}
           >
             <option value="">Select Component</option>
             {shipComponents.map(c => (
