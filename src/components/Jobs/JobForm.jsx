@@ -52,7 +52,7 @@ function JobForm() {
           <label className="block text-sm font-medium">Ship</label>
           <select
             value={formData.shipId}
-            onChange={(e) => setFormData({ ...formData, shipId: e.target.value, componentId: '' })} // Reset componentId when ship changes
+            onChange={(e) => setFormData({ ...formData, shipId: e.target.value, componentId: '' })}
             className="w-full p-2 border rounded"
             required
           >

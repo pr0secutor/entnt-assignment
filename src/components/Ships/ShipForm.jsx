@@ -17,7 +17,7 @@ function ShipForm({ existingShip, onClose }) {
     } else {
       addShip(formData);
     }
-    setFormData({ name: '', imo: '', flag: '', status: 'Active' }); // Reset form
+    setFormData({ name: '', imo: '', flag: '', status: 'Active' });
     setError('');
     onClose();
   };

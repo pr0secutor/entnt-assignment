@@ -4,13 +4,21 @@ import "react-calendar/dist/Calendar.css";
 import { JobsContext } from "../../contexts/JobsContext";
 import JobList from "./JobList";
 
+const formatLocalDate = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 function JobCalendar() {
   const { jobs } = useContext(JobsContext);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const jobsOnDate = jobs.filter(
-    (j) => j.scheduledDate === selectedDate.toISOString().split("T")[0]
-  );
+  const jobsOnDate = jobs.filter((j) => {
+    const jobDate = j.scheduledDate.split("T")[0];
+    return jobDate === formatLocalDate(selectedDate);
+  });
 
   return (
     <div className="py-6">
@@ -21,8 +29,11 @@ function JobCalendar() {
             onChange={setSelectedDate}
             value={selectedDate}
             tileContent={({ date }) => {
-              const dateStr = date.toISOString().split("T")[0];
-              const hasJobs = jobs.some((j) => j.scheduledDate === dateStr);
+              const dateStr = formatLocalDate(date);
+              const hasJobs = jobs.some((j) => {
+                const jobDate = j.scheduledDate.split("T")[0];
+                return jobDate === dateStr;
+              });
               return hasJobs ? (
                 <p className="text-red-500 font-bold">•</p>
               ) : null;
