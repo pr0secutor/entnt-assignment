@@ -13,3 +13,25 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+There are three users:
+
+**Admin**
+email: admin@entnt.in
+password: admin123
+
+Access for admin: Ships Management (Add, update, delete ships), Component Management(Add, update, delete components), Jobs Management(Add, update, delete components), Dashboard
+
+**Inspector**
+email: inspector@entnt.in
+password: inspect123
+
+Access for Inspector: Ships Management (View only), Component Management(Add, update, delete components), Jobs Management(Add, update, delete components), Dashboard
+
+**Engineer**
+email: engineer@entnt.in
+password: engine123
+
+Access for Engineer: Ships Management (View only), Component Management(View only), Component Management(View only), Jobs Management(View only), Dashboard
+
+I am maintaining AuthContext for managing users, ComponentsContext for managing the components data, ShipsContext for managing ships data, JobsContext for managing the jobs data, and NotificationContext for managing notifications from anywhere in the app.
