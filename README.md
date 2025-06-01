@@ -17,19 +17,19 @@ You may also see any lint errors in the console.
 There are three users:
 
 **Admin**
-email: admin@entnt.in
+email: admin@entnt.in \
 password: admin123
 
 Access for admin: Ships Management (Add, update, delete ships), Component Management(Add, update, delete components), Jobs Management(Add, update, delete components), Dashboard
 
 **Inspector**
-email: inspector@entnt.in
+email: inspector@entnt.in \
 password: inspect123
 
 Access for Inspector: Ships Management (View only), Component Management(Add, update, delete components), Jobs Management(Add, update, delete components), Dashboard
 
 **Engineer**
-email: engineer@entnt.in
+email: engineer@entnt.in \
 password: engine123
 
 Access for Engineer: Ships Management (View only), Component Management(View only), Component Management(View only), Jobs Management(View only), Dashboard
