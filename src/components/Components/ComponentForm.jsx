@@ -23,7 +23,7 @@ function ComponentForm({ shipId }) {
   };
 
   return (
-    <div className="max-w-md mx-auto my-4 p-6 bg-white rounded shadow">
+    <div className="max-w-md my-4 p-6 bg-white rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Add Component</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit}>

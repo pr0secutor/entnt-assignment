@@ -1,8 +1,9 @@
-import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { ShipsContext } from '../../contexts/ShipsContext';
-import { ComponentsContext } from '../../contexts/ComponentsContext';
-import { JobsContext } from '../../contexts/JobsContext';
+import { AuthContext } from '../../contexts/AuthContext';
+import { roleUtils } from '../../utils/roleUtils';
+import ShipForm from './ShipForm';
 import ComponentList from '../Components/ComponentList';
 import ComponentForm from '../Components/ComponentForm';
 import JobList from '../Jobs/JobList';
@@ -10,33 +11,50 @@ import JobList from '../Jobs/JobList';
 function ShipDetail() {
   const { id } = useParams();
   const { ships } = useContext(ShipsContext);
-  const { components } = useContext(ComponentsContext);
-  const { jobs } = useContext(JobsContext);
+  const { user } = useContext(AuthContext);
   const ship = ships.find(s => s.id === id);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [showComponentForm, setShowComponentForm] = useState(false);
 
-  if (!ship) return <div className="p-6">Ship not found</div>;
-
-  const shipComponents = components.filter(c => c.shipId === id);
-  const shipJobs = jobs.filter(j => j.shipId === id);
+  if (!ship) {
+    return <div className="p-6">Ship not found</div>;
+  }
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">{ship.name}</h2>
-      <div className="bg-white p-4 rounded shadow mb-6">
-        <h3 className="text-xl font-semibold">General Information</h3>
+      <h1 className="text-3xl font-bold mb-6">{ship.name}</h1>
+      <div className="bg-white p-6 rounded shadow mb-6">
         <p><strong>IMO Number:</strong> {ship.imo}</p>
         <p><strong>Flag:</strong> {ship.flag}</p>
         <p><strong>Status:</strong> {ship.status}</p>
+        {roleUtils.canManageShips(user?.role) && (
+          <button
+            onClick={() => setShowEditForm(!showEditForm)}
+            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            {showEditForm ? 'Cancel Edit' : 'Edit Ship'}
+          </button>
+        )}
       </div>
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">Components</h3>
-        <ComponentList shipId={id} />
-        <ComponentForm shipId={id} />
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold mb-2">Maintenance History</h3>
-        <JobList jobs={shipJobs} />
-      </div>
+      {showEditForm && roleUtils.canManageShips(user?.role) && (
+        <ShipForm
+          existingShip={ship}
+          onClose={() => setShowEditForm(false)}
+        />
+      )}
+      {roleUtils.canManageComponents(user?.role) && (
+        <div className="mb-6">
+          <button
+            onClick={() => setShowComponentForm(!showComponentForm)}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            {showComponentForm ? 'Close Form' : 'Add Component'}
+          </button>
+        </div>
+      )}
+      {showComponentForm && <ComponentForm shipId={id} />}
+      <ComponentList shipId={id} />
+      <JobList shipId={id} />
     </div>
   );
 }

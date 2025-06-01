@@ -8,8 +8,10 @@ function ShipForm({ existingShip, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.debug('ShipForm handleSubmit called with:', formData); // Debug
     if (!formData.name || !formData.imo || !formData.flag) {
       setError('All fields are required');
+      console.debug('Validation failed: Missing required fields'); // Debug
       return;
     }
     if (existingShip) {
@@ -17,6 +19,8 @@ function ShipForm({ existingShip, onClose }) {
     } else {
       addShip(formData);
     }
+    setFormData({ name: '', imo: '', flag: '', status: 'Active' }); // Reset form
+    setError('');
     onClose();
   };
 
@@ -66,16 +70,18 @@ function ShipForm({ existingShip, onClose }) {
             <option value="Under Maintenance">Under Maintenance</option>
           </select>
         </div>
-        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
-          {existingShip ? 'Update' : 'Add'} Ship
-        </button>
-        <button
-          type="button"
-          onClick={onClose}
-          className="w-full mt-2 bg-gray-300 text-black p-2 rounded hover:bg-gray-400"
-        >
-          Cancel
-        </button>
+        <div className="flex space-x-2">
+          <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+            {existingShip ? 'Update Ship' : 'Add Ship'}
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-full bg-gray-300 text-gray-800 p-2 rounded hover:bg-gray-400"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
